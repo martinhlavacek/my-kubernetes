@@ -13,5 +13,4 @@ Kdyz jsem neco resil z kubernetes a nefungovalo mi to tak jsem musel neco upravo
 ## [1.1. Metrics-server](./metrics-server/readme.md)
 Informace o vyuziti prostredku jako je CPU(cores), CPU%, Memory(bytes) a MEMORY%
 
----
 

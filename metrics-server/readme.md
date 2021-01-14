@@ -68,6 +68,8 @@ kubectl descibe deployment metrics-server
 2. Zkontrolovat jestli bezi pod metrics-serveru `pod/metrics-server-xxxx` pokud bezi RUNNING a READY je 1/1. 
 Kazdpodadne jestli vsechno vypada ze je dobre a vse bezi je potreba se podivat do logu podu `pod/metrics-server-xxxx`
 
-``` kubectl logs metrics-server-xxxx`
+```
+kubectl logs metrics-server-xxxx
+```
 
 A v tomto logu se dovite vsechno proc container nenastartoval.

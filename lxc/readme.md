@@ -205,13 +205,86 @@ config:
   limits.memory: 512MB
 ```
 
+## FILE
+
+### PUSH
+> upload soubrou
+```bash
+lxc file push [jmeno souboru] [nazev kontejneru]/path/
+```
+
+*priklad*
+```bash
+lxc file push readme ubuntu1/root/
+```
+
+### PULL
+> download soubrou
+```bash
+lxc file pull [nazev kontejneru]/path/ [cesta na lokale]
+```
+
+*priklad*
+```bash
+lxc file pull ubuntu1/root/readme .
+```
+
+### SNAPSHOT
+> vytvoreni snapshotu kontejneru
+```bash
+lxc snapshot [nazev kontejneru] [nazev snapshoru]
+```
+
+*priklad*
+```bash
+lxc snapshot u1 su1
+```
+
+### RESTORE
+> obnoveni kontejneru ze snapshotu
+> pokud potrebujes znat nazev snapshotu ktery se ma obnovit tak `lxc info u1` a dole je videt seznam snapshots
+```bash
+lxc restore [nazev kontejneru] [nazev snapshoru]
+```
+
+*priklad*
+```bash
+lxc restore u1 su1
+```
+
 ## Prace v kontejneru
 
 > prikaz pro spusteni `bash` v kontaineru a pristup do nej `lxc exec ubuntu bash`
 
-### 1. ping mezi kontejnerama
+### ping mezi kontejnerama
 
 ```bash
 ping ubuntu1.lxd
 ```
 
+## Vnorovani lxc/lxd
+> pokud chce vnorovat do kontaineru dalsi lxc/lxd, tak je potreba nastavit konfiguraci pro kontejner
+
+### Rucni nastaveni kontejneru
+> je potreba zastavit kontejner
+```bash
+lxc stop ubuntu1
+```
+> rucni nastaveni konfigurace pro nesting kontejneru
+```bash
+lxc config set ubuntu1 security.privileged true
+lxc config set ubuntu1 security.nesting true
+```
+
+### Nastaveni profilu
+> editace profilu
+```bash
+lxc profile edit custom
+```
+> nastaveni profilu - pridat security.privilaged true a security.nesting true do sekce config
+
+```yaml
+config:
+  security.privilaged true
+  security.nesting true
+```

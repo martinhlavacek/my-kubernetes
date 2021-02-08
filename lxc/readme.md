@@ -2,30 +2,28 @@
 
 ## Instalace [zde](./install.md)
 ---
-## 1. prikazy
+## SEZNAM PRIKAZU
 
-### 1.1 - list repository
-
+### REMOTE LIST
+> seznam repository
 ```bash
 lxc remote list
 ```
 
-### 1.2 - seznam bezicih lxc kontejneru
-
+### LIST
+> seznam bezicih lxc kontejneru
 ```bash
 lxc list
 ```
 
-### 1.3 - seznam stazenych obrazu
-
+### IMAGE LIST
+> seznam stazenych obrazu
 ```bash
 lxc image list
 ```
 
-### 1.4 - vyhledani a zobrazeni obrazu
-
+### IMAGE LIST IMAGE:CEB
 > vyhledani centos v images repo
-
 ```bash
 lxc image list images:cen
 ```
@@ -33,20 +31,31 @@ lxc image list images:cen
 lxc image list images:cent | less
 ```
 
-### 1.5 - spusteni kontejneru
-
+### LAUNCH
+> spusteni kontejneru
 > pokud obraz neni stazeny tak se stahne a spusti se kontejner
 
 ```bash
-lxc launch [nazev repository]:[verze] [nazev kontaineru]
+lxc launch [nazev obrazu]:[verze] [nazev kontaineru]
 ```
 *priklad*
 ```bash
 lxc launch ubuntu:20.04 ubuntu1
 ```
 
-### 1.6 - smazani beziciho kontaineru
+### LAUNCH - S PROFILE
+> spusteni kontejneru s profilem
 
+```bash
+lxc launch [nazev obrazu]:[verze] [nazev kontaineru] --profile [nazev profilu]
+```
+*priklad*
+```bash
+lxc launch ubuntu:20.04 ubuntu1 --profile custom
+```
+
+### DELETE
+> smazani beziciho kontaineru
 ```bash
 lxc delete [nazev kontaineru]
 ```
@@ -58,7 +67,8 @@ lxc delete ubuntu1
 ```
 > _bezici kontainer ktery chces smazat tak se musi pouzit parametr `--force`_
 
-### 1.7 - zastaveni kontejneru
+### STOP
+> zastaveni kontejneru
 ```bash
 lxc stop [nazev kontejneru]
 ```
@@ -67,7 +77,8 @@ lxc stop [nazev kontejneru]
 lxc stop ubuntu1
 ```
 
-### 1.8 - start zastaveneho kontejneru
+### START
+> start zastaveneho kontejneru
 ```bash
 lxc start [nazev]
 ```
@@ -76,7 +87,8 @@ lxc start [nazev]
 ```bash
 lxc start ubuntu1
 ```
-### 1.9 - kopirovani kontejneru
+### COPY
+> kopirovani kontejneru
 ```bash
 lxc copy [nazev zdrojoveho kontejneru] [nazev jak se bude jmenovat novy kontejner]
 ```
@@ -86,7 +98,8 @@ lxc copy [nazev zdrojoveho kontejneru] [nazev jak se bude jmenovat novy kontejne
 lxc copy ubuntu1 ubuntu2
 ```
 
-### 1.10 - prejmenovani kontejneru
+### MOVE
+> prejmenovani kontejneru
 > prejmenovani se muze delat jen kdyz je kontejner zastaveny
 ```bash
 lxc move [nazev] [novy nazev]
@@ -97,7 +110,8 @@ lxc move ubuntu1 ubuntu1New
 ```
 
 
-### 1.11 - pristup do beziciho kontejneru
+### EXEC
+> pristup do beziciho kontejneru
 ```bash
 lxc exec [nazev] [prikaz]
 ```
@@ -105,11 +119,91 @@ lxc exec [nazev] [prikaz]
 ```bash
 lxc exec ubuntu1 bash
 ```
-#### 1.11.1 - pristup do beziciho kontejneru jako jiny uzivate
+### EXEC su - ubuntu
+> pristup do beziciho kontejneru jako jiny uzivate
 ```bash
 lxc exec ubuntu1 su - ubuntu
 ```
+#### 1.12 - info o kontejneru
+```bash
+lxc info ubuntu1
+```
 
+### CONFIG
+> config kontejneru
+```bash
+lxc config show ubuntu1
+```
+
+### CONFIG SET LIMITS - MEMORY
+> kontejner musi byt zastaveny
+> config kontejneru na limit pameti
+```bash
+lxc config set [nazev kontejneru] limits.memory [velikost]
+```
+*priklad*
+
+```bash
+lxc config set ubuntu limits.memory 512MB
+```
+
+### CONFIG SET LIMITS - CPU
+> kontejner musi byt zastaveny
+> config kontejneru na limit cpu
+```bash
+lxc config set [nazev kontejneru] limits.cpu [pocet]
+```
+*priklad*
+
+```bash
+lxc config set ubuntu limits.cpu 1
+```
+
+
+
+### PROFILE LIST
+> seznam profilu
+> profily slouzi ke specifikovani napriklad nastaveni pro dany lxc kontejner...jako je napriklad velikost pameti, cpu atd
+```bash
+lxc profile list
+```
+
+### PROFILE - SHOW
+> zobrazeni informaci o profilu
+```bash
+lxc profile show [nazev profilu]
+```
+*priklad*
+```bash
+lxc profile show default
+```
+
+### PROFILE - COPY
+> vytvoreni noveho profilu z existujiciho
+
+```bash
+lxc profile copy [nazev existujiciho profilu] [nazev nove profilu]
+```
+
+```bash
+lxc profile copy default custom
+```
+
+### PROFILE - EDIT
+> editace profilu
+
+```bash
+lxc profile edit [nazev]
+```
+
+```bash
+lxc profile edit custom
+```
+> spusti se editor `vi` a muze se nastavit napriklad limit na pamet
+```yaml
+config:
+  limits.memory: 512MB
+```
 
 ## Prace v kontejneru
 
@@ -120,3 +214,4 @@ lxc exec ubuntu1 su - ubuntu
 ```bash
 ping ubuntu1.lxd
 ```
+

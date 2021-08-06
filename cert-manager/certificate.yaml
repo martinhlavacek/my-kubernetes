@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  dnsNames:
+    - example.cz
+    # - www.example.cz
+  secretName: nginx-tls
+  issuerRef:
+    name: letsencrypt-cluster-issuer
+    kind: ClusterIssuer

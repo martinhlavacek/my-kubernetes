@@ -2,6 +2,12 @@
 
 ## Instalace [zde](./install.md)
 ---
+!!Po nainstalovani lxc/lxd je potreba spustit 
+```bash
+lxd init
+```
+## LCD init
+
 ## SEZNAM PRIKAZU
 
 ### REMOTE LIST
